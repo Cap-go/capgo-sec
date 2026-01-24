@@ -1,0 +1,53 @@
+{
+  "name": "capsec",
+  "version": "1.0.0",
+  "description": "Security scanner for Capacitor apps - detect vulnerabilities, hardcoded secrets, and security misconfigurations",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "capsec": "./dist/cli/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "bun build src/cli/index.ts --outdir dist/cli --target node && bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/cli/index.ts",
+    "test": "bun test",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "capacitor",
+    "security",
+    "scanner",
+    "vulnerability",
+    "static-analysis",
+    "ionic",
+    "mobile",
+    "android",
+    "ios"
+  ],
+  "author": "Capgo Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cap-go/capacitor-sec"
+  },
+  "homepage": "https://capacitor-sec.dev",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
+    "@babel/types": "^7.24.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fast-glob": "^3.3.2",
+    "ora": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/babel__traverse": "^7.20.5",
+    "@types/bun": "latest",
+    "typescript": "^5.4.0"
+  }
+}

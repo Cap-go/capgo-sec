@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capsec - Capacitor Security Scanner</title>
+  <meta name="description" content="Zero-config security scanner for Capacitor & Ionic apps. Detect vulnerabilities, hardcoded secrets, and security misconfigurations with 60+ security rules.">
+  <meta name="keywords" content="capacitor, ionic, security, scanner, vulnerability, mobile, app, android, ios">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Capsec - Capacitor Security Scanner">
+  <meta property="og:description" content="Zero-config security scanner for Capacitor & Ionic apps. Detect vulnerabilities and security issues in seconds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capacitor-sec.dev">
+  <meta property="og:image" content="https://capacitor-sec.dev/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capsec - Capacitor Security Scanner">
+  <meta name="twitter:description" content="Zero-config security scanner for Capacitor & Ionic apps">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7c3aed',
+            secondary: '#4f46e5'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .code-block {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-white antialiased">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-lg z-50 border-b border-slate-800">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🔒</span>
+        <span class="font-bold text-xl">capsec</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#features" class="text-slate-300 hover:text-white transition">Features</a>
+        <a href="#rules" class="text-slate-300 hover:text-white transition">Rules</a>
+        <a href="#docs" class="text-slate-300 hover:text-white transition">Docs</a>
+        <a href="https://github.com/Cap-go/capacitor-sec" class="flex items-center gap-2 text-slate-300 hover:text-white transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center pt-20">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full text-sm mb-6">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            63+ Security Rules
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Security Scanner for
+            <span class="gradient-text">Capacitor Apps</span>
+          </h1>
+          <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+            Zero-config security scanner that detects vulnerabilities, hardcoded secrets, and security misconfigurations in your Capacitor & Ionic applications.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <div class="code-block px-6 py-4 rounded-lg flex items-center gap-3 flex-1">
+              <span class="text-slate-400">$</span>
+              <code class="text-cyan-400">bunx capsec scan</code>
+              <button onclick="navigator.clipboard.writeText('bunx capsec scan')" class="ml-auto text-slate-400 hover:text-white transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-8 text-sm text-slate-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Local Only
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              CI/CD Ready
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Free & Open Source
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="code-block rounded-2xl p-6 shadow-2xl float-animation">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-4 text-slate-400 text-sm">terminal</span>
+            </div>
+            <pre class="text-sm leading-relaxed"><code><span class="text-slate-400">$</span> <span class="text-cyan-400">bunx capsec scan</span>
+
+<span class="text-purple-400">╔═══════════════════════════════════════════════╗</span>
+<span class="text-purple-400">║</span>  <span class="text-white">🔒 CAPSEC</span> Security Scan Report           <span class="text-purple-400">║</span>
+<span class="text-purple-400">╚═══════════════════════════════════════════════╝</span>
+
+<span class="text-white">Scanning...</span> ████████████████████ <span class="text-green-400">100%</span>
+
+<span class="text-slate-400">Files scanned:</span> <span class="text-white">847</span>
+<span class="text-slate-400">Time:</span> <span class="text-white">2.4s</span>
+
+<span class="text-red-400">● CRITICAL</span>  2
+<span class="text-orange-400">● HIGH</span>      5
+<span class="text-yellow-400">● MEDIUM</span>    8
+<span class="text-cyan-400">● LOW</span>       3
+
+<span class="text-red-500">[SEC001]</span> Hardcoded API Key
+  <span class="text-slate-400">src/services/api.ts:42</span>
+  <span class="text-slate-500">Found AWS Access Key: AKIA***</span>
+
+<span class="text-orange-500">[NET003]</span> Cleartext Traffic Enabled
+  <span class="text-slate-400">capacitor.config.ts:15</span>
+  <span class="text-slate-500">cleartext: true allows HTTP</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-24 bg-slate-800/50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Built for Capacitor Developers</h2>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          Security scanning designed specifically for the Capacitor ecosystem
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">⚡</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Zero Configuration</h3>
+          <p class="text-slate-400">Works out of the box with any Capacitor or Ionic project. No setup required.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">🔐</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Local Processing</h3>
+          <p class="text-slate-400">Your code never leaves your machine. Complete privacy and security.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">🚀</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">CI/CD Integration</h3>
+          <p class="text-slate-400">GitHub Actions, GitLab CI, and all major CI/CD platforms supported.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">📱</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Platform-Specific</h3>
+          <p class="text-slate-400">Android and iOS specific rules including AndroidManifest.xml and Info.plist checks.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">🔑</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Secret Detection</h3>
+          <p class="text-slate-400">Detects 30+ types of API keys and secrets including AWS, Stripe, Firebase, and more.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800 hover:border-primary/50 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-2xl">📊</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Multiple Outputs</h3>
+          <p class="text-slate-400">CLI, JSON, and HTML reports with remediation guidance for every finding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rules Section -->
+  <section id="rules" class="py-24">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">63+ Security Rules</h2>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          Comprehensive security coverage across 13 categories
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🔑 Secrets</div>
+          <p class="text-slate-400 text-sm">API keys, tokens, credentials</p>
+          <span class="text-primary text-sm font-bold">2 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">💾 Storage</div>
+          <p class="text-slate-400 text-sm">Preferences, localStorage, SQLite</p>
+          <span class="text-primary text-sm font-bold">6 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🌐 Network</div>
+          <p class="text-slate-400 text-sm">HTTP, SSL/TLS, WebSocket</p>
+          <span class="text-primary text-sm font-bold">8 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">⚡ Capacitor</div>
+          <p class="text-slate-400 text-sm">Config, plugins, native bridge</p>
+          <span class="text-primary text-sm font-bold">10 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🤖 Android</div>
+          <p class="text-slate-400 text-sm">Manifest, WebView, permissions</p>
+          <span class="text-primary text-sm font-bold">8 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🍎 iOS</div>
+          <p class="text-slate-400 text-sm">ATS, Keychain, entitlements</p>
+          <span class="text-primary text-sm font-bold">8 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🔐 Authentication</div>
+          <p class="text-slate-400 text-sm">JWT, OAuth, biometrics</p>
+          <span class="text-primary text-sm font-bold">6 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🖼️ WebView</div>
+          <p class="text-slate-400 text-sm">XSS, CSP, iframe security</p>
+          <span class="text-primary text-sm font-bold">5 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🔒 Cryptography</div>
+          <p class="text-slate-400 text-sm">Algorithms, keys, IV generation</p>
+          <span class="text-primary text-sm font-bold">4 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">📝 Logging</div>
+          <p class="text-slate-400 text-sm">Sensitive data in logs</p>
+          <span class="text-primary text-sm font-bold">2 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">🐛 Debug</div>
+          <p class="text-slate-400 text-sm">Test creds, dev URLs</p>
+          <span class="text-primary text-sm font-bold">3 rules</span>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+          <div class="font-bold text-lg mb-2">📦 And More</div>
+          <p class="text-slate-400 text-sm">Config, permissions</p>
+          <span class="text-primary text-sm font-bold">1+ rules</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CI/CD Section -->
+  <section class="py-24 bg-slate-800/50">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-4xl font-bold mb-6">CI/CD Integration</h2>
+          <p class="text-xl text-slate-300 mb-8">
+            Integrate capsec into your development workflow. Run security checks on every pull request and deployment.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <span>GitHub Actions</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"/></svg>
+              <span>GitLab CI</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-2xl">🔄</span>
+              <span>Any CI/CD Platform</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block rounded-2xl p-6">
+          <div class="text-slate-400 text-sm mb-4">.github/workflows/security.yml</div>
+          <pre class="text-sm"><code><span class="text-purple-400">name:</span> Security Scan
+
+<span class="text-purple-400">on:</span> [push, pull_request]
+
+<span class="text-purple-400">jobs:</span>
+  <span class="text-cyan-400">security:</span>
+    <span class="text-purple-400">runs-on:</span> ubuntu-latest
+    <span class="text-purple-400">steps:</span>
+      - <span class="text-purple-400">uses:</span> actions/checkout@v4
+
+      - <span class="text-purple-400">name:</span> Setup Bun
+        <span class="text-purple-400">uses:</span> oven-sh/setup-bun@v1
+
+      - <span class="text-purple-400">name:</span> Run Security Scan
+        <span class="text-purple-400">run:</span> bunx capsec scan --ci</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6">Ready to Secure Your App?</h2>
+      <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
+        Start scanning your Capacitor project in seconds. No signup required.
+      </p>
+
+      <div class="code-block inline-block px-8 py-4 rounded-lg mb-8">
+        <code class="text-lg"><span class="text-slate-400">$</span> <span class="text-cyan-400">bunx capsec scan</span></code>
+      </div>
+
+      <div class="flex justify-center gap-4">
+        <a href="https://github.com/Cap-go/capacitor-sec" class="bg-primary hover:bg-primary/80 text-white px-8 py-3 rounded-lg font-bold transition">
+          View on GitHub
+        </a>
+        <a href="#docs" class="bg-slate-700 hover:bg-slate-600 text-white px-8 py-3 rounded-lg font-bold transition">
+          Read the Docs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-800/50 py-12 border-t border-slate-800">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-2xl">🔒</span>
+            <span class="font-bold text-xl">capsec</span>
+          </div>
+          <p class="text-slate-400 text-sm">
+            Security scanner for Capacitor apps. Built with ❤️ by the <a href="https://capgo.app" class="text-primary hover:underline">Capgo</a> team.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-4">Product</h4>
+          <ul class="space-y-2 text-slate-400">
+            <li><a href="#features" class="hover:text-white transition">Features</a></li>
+            <li><a href="#rules" class="hover:text-white transition">Security Rules</a></li>
+            <li><a href="#docs" class="hover:text-white transition">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-4">Resources</h4>
+          <ul class="space-y-2 text-slate-400">
+            <li><a href="https://github.com/Cap-go/capacitor-sec" class="hover:text-white transition">GitHub</a></li>
+            <li><a href="https://www.npmjs.com/package/capsec" class="hover:text-white transition">npm</a></li>
+            <li><a href="https://capgo.app" class="hover:text-white transition">Capgo</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-4">Legal</h4>
+          <ul class="space-y-2 text-slate-400">
+            <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="https://github.com/Cap-go/capacitor-sec/blob/main/LICENSE" class="hover:text-white transition">MIT License</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400 text-sm">
+        <p>© 2024 Capgo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
