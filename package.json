@@ -32,7 +32,7 @@
     "type": "git",
     "url": "https://github.com/Cap-go/capacitor-sec"
   },
-  "homepage": "https://capacitor-sec.dev",
+  "homepage": "https://capgo.app/security-scanner/",
   "engines": {
     "node": ">=18.0.0"
   },
