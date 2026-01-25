@@ -117,10 +117,11 @@ export class SecurityScanner {
         if (!rule.filePatterns) return true;
         return rule.filePatterns.some(pattern => {
           // Convert glob pattern to regex for matching
+          // First escape dots, then handle glob patterns
           const regexPattern = pattern
+            .replace(/\./g, '\\.')
             .replace(/\*\*/g, '.*')
-            .replace(/\*/g, '[^/]*')
-            .replace(/\./g, '\\.');
+            .replace(/(?<!\.)(\*)/g, '[^/]*');
           return new RegExp(regexPattern).test(filePath);
         });
       });
