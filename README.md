@@ -7,6 +7,8 @@
   <h2><a href="https://capgo.app/consulting/?ref=repo_capgo_sec"> Missing a feature? We’ll build the plugin for you</a></h2>
 </div>
 
+> Formerly published as `@capgo/capacitor-sec` (and `Cap-go/capacitor-sec`). Links and redirects should continue to work.
+
 [![npm version](https://badge.fury.io/js/capsec.svg)](https://www.npmjs.com/package/capsec)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
