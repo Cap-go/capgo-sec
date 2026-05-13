@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Bump version and create tag
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -68,7 +72,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version: 24.x
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
