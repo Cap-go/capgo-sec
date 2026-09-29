@@ -45,7 +45,7 @@
     "chalk": "^6.0.0",
     "commander": "^15.0.0",
     "fast-glob": "^3.3.2",
-    "ora": "^8.0.1"
+    "ora": "^9.0.0"
   },
   "devDependencies": {
     "@types/babel__traverse": "^7.20.5",
