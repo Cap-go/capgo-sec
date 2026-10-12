@@ -39,7 +39,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@babel/parser": "^7.24.0",
+    "@babel/parser": "^8.0.0",
     "@babel/traverse": "^8.0.0",
     "@babel/types": "^8.0.0",
     "chalk": "^6.0.0",
